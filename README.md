@@ -7,4 +7,4 @@ Drag AKExcelCollectionViewCell.swift , AKExcelDateManager.swift and AKExcelView.
 Demo shows detail how to use this.
 
 # Thanks 
-BSNumbersView , A form like Excel in Objective-C
+[BSNumbersView](https://github.com/blurryssky/BSNumbersView) , A form like Excel in Objective-C
