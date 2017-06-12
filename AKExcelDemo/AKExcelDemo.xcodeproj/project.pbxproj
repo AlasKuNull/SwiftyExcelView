@@ -1,0 +1,339 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		4BDDB58B1EDE71EB00B746C4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDDB58A1EDE71EB00B746C4 /* AppDelegate.swift */; };
+		4BDDB58D1EDE71EB00B746C4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDDB58C1EDE71EB00B746C4 /* ViewController.swift */; };
+		4BDDB5901EDE71EB00B746C4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4BDDB58E1EDE71EB00B746C4 /* Main.storyboard */; };
+		4BDDB5921EDE71EB00B746C4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4BDDB5911EDE71EB00B746C4 /* Assets.xcassets */; };
+		4BDDB5951EDE71EB00B746C4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4BDDB5931EDE71EB00B746C4 /* LaunchScreen.storyboard */; };
+		4BDDB59D1EDE720400B746C4 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDDB59C1EDE720400B746C4 /* Model.swift */; };
+		4BDDB5A21EDE725F00B746C4 /* AKExcelCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDDB59F1EDE725F00B746C4 /* AKExcelCollectionViewCell.swift */; };
+		4BDDB5A31EDE725F00B746C4 /* AKExcelDateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDDB5A01EDE725F00B746C4 /* AKExcelDateManager.swift */; };
+		4BDDB5A41EDE725F00B746C4 /* AKExcelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDDB5A11EDE725F00B746C4 /* AKExcelView.swift */; };
+		4BDDB5A61EDE9FB100B746C4 /* demo.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4BDDB5A51EDE9FB100B746C4 /* demo.gif */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		4BDDB5871EDE71EB00B746C4 /* AKExcelDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AKExcelDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4BDDB58A1EDE71EB00B746C4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		4BDDB58C1EDE71EB00B746C4 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		4BDDB58F1EDE71EB00B746C4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		4BDDB5911EDE71EB00B746C4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		4BDDB5941EDE71EB00B746C4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		4BDDB5961EDE71EB00B746C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4BDDB59C1EDE720400B746C4 /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		4BDDB59F1EDE725F00B746C4 /* AKExcelCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKExcelCollectionViewCell.swift; sourceTree = "<group>"; };
+		4BDDB5A01EDE725F00B746C4 /* AKExcelDateManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKExcelDateManager.swift; sourceTree = "<group>"; };
+		4BDDB5A11EDE725F00B746C4 /* AKExcelView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKExcelView.swift; sourceTree = "<group>"; };
+		4BDDB5A51EDE9FB100B746C4 /* demo.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = demo.gif; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		4BDDB5841EDE71EB00B746C4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		4BDDB57E1EDE71EB00B746C4 = {
+			isa = PBXGroup;
+			children = (
+				4BDDB5891EDE71EB00B746C4 /* AKExcelDemo */,
+				4BDDB5881EDE71EB00B746C4 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		4BDDB5881EDE71EB00B746C4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4BDDB5871EDE71EB00B746C4 /* AKExcelDemo.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4BDDB5891EDE71EB00B746C4 /* AKExcelDemo */ = {
+			isa = PBXGroup;
+			children = (
+				4BDDB59E1EDE725300B746C4 /* AKExcelView */,
+				4BDDB58A1EDE71EB00B746C4 /* AppDelegate.swift */,
+				4BDDB58C1EDE71EB00B746C4 /* ViewController.swift */,
+				4BDDB59C1EDE720400B746C4 /* Model.swift */,
+				4BDDB58E1EDE71EB00B746C4 /* Main.storyboard */,
+				4BDDB5911EDE71EB00B746C4 /* Assets.xcassets */,
+				4BDDB5931EDE71EB00B746C4 /* LaunchScreen.storyboard */,
+				4BDDB5A51EDE9FB100B746C4 /* demo.gif */,
+				4BDDB5961EDE71EB00B746C4 /* Info.plist */,
+			);
+			path = AKExcelDemo;
+			sourceTree = "<group>";
+		};
+		4BDDB59E1EDE725300B746C4 /* AKExcelView */ = {
+			isa = PBXGroup;
+			children = (
+				4BDDB59F1EDE725F00B746C4 /* AKExcelCollectionViewCell.swift */,
+				4BDDB5A01EDE725F00B746C4 /* AKExcelDateManager.swift */,
+				4BDDB5A11EDE725F00B746C4 /* AKExcelView.swift */,
+			);
+			path = AKExcelView;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		4BDDB5861EDE71EB00B746C4 /* AKExcelDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4BDDB5991EDE71EB00B746C4 /* Build configuration list for PBXNativeTarget "AKExcelDemo" */;
+			buildPhases = (
+				4BDDB5831EDE71EB00B746C4 /* Sources */,
+				4BDDB5841EDE71EB00B746C4 /* Frameworks */,
+				4BDDB5851EDE71EB00B746C4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AKExcelDemo;
+			productName = AKExcelDemo;
+			productReference = 4BDDB5871EDE71EB00B746C4 /* AKExcelDemo.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		4BDDB57F1EDE71EB00B746C4 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0830;
+				LastUpgradeCheck = 0830;
+				ORGANIZATIONNAME = alasku;
+				TargetAttributes = {
+					4BDDB5861EDE71EB00B746C4 = {
+						CreatedOnToolsVersion = 8.3.2;
+						DevelopmentTeam = 4BJ85S653K;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 4BDDB5821EDE71EB00B746C4 /* Build configuration list for PBXProject "AKExcelDemo" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 4BDDB57E1EDE71EB00B746C4;
+			productRefGroup = 4BDDB5881EDE71EB00B746C4 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				4BDDB5861EDE71EB00B746C4 /* AKExcelDemo */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		4BDDB5851EDE71EB00B746C4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4BDDB5A61EDE9FB100B746C4 /* demo.gif in Resources */,
+				4BDDB5951EDE71EB00B746C4 /* LaunchScreen.storyboard in Resources */,
+				4BDDB5921EDE71EB00B746C4 /* Assets.xcassets in Resources */,
+				4BDDB5901EDE71EB00B746C4 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		4BDDB5831EDE71EB00B746C4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4BDDB5A41EDE725F00B746C4 /* AKExcelView.swift in Sources */,
+				4BDDB59D1EDE720400B746C4 /* Model.swift in Sources */,
+				4BDDB5A31EDE725F00B746C4 /* AKExcelDateManager.swift in Sources */,
+				4BDDB58D1EDE71EB00B746C4 /* ViewController.swift in Sources */,
+				4BDDB5A21EDE725F00B746C4 /* AKExcelCollectionViewCell.swift in Sources */,
+				4BDDB58B1EDE71EB00B746C4 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		4BDDB58E1EDE71EB00B746C4 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4BDDB58F1EDE71EB00B746C4 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		4BDDB5931EDE71EB00B746C4 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4BDDB5941EDE71EB00B746C4 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		4BDDB5971EDE71EB00B746C4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		4BDDB5981EDE71EB00B746C4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		4BDDB59A1EDE71EB00B746C4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 4BJ85S653K;
+				INFOPLIST_FILE = AKExcelDemo/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.alasku.AKExcelDemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		4BDDB59B1EDE71EB00B746C4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 4BJ85S653K;
+				INFOPLIST_FILE = AKExcelDemo/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.alasku.AKExcelDemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		4BDDB5821EDE71EB00B746C4 /* Build configuration list for PBXProject "AKExcelDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4BDDB5971EDE71EB00B746C4 /* Debug */,
+				4BDDB5981EDE71EB00B746C4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4BDDB5991EDE71EB00B746C4 /* Build configuration list for PBXNativeTarget "AKExcelDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4BDDB59A1EDE71EB00B746C4 /* Debug */,
+				4BDDB59B1EDE71EB00B746C4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 4BDDB57F1EDE71EB00B746C4 /* Project object */;
+}
