@@ -117,7 +117,7 @@ class AKExcelView: UIView , UICollectionViewDelegate , UICollectionViewDataSourc
         NotificationCenter.default.removeObserver(self)
     }
     
-    func handleNotifi(notifi:NSNotification) {
+    @objc func handleNotifi(notifi:NSNotification) {
         
         let orientation = UIDevice.current.orientation
         if orientation != UIDeviceOrientation.portraitUpsideDown {

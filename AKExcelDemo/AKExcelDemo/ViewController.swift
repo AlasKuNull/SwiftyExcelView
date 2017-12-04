@@ -29,7 +29,7 @@ class ViewController: UIViewController , AKExcelViewDelegate {
         }
 
         // 自动滚到最近的一列
-//        excelView.autoScrollToNearItem = true
+        excelView.autoScrollToNearItem = true
         // 设置表头背景色
         excelView.headerBackgroundColor = UIColor.cyan
         // 设置表头
@@ -67,15 +67,15 @@ class ViewController: UIViewController , AKExcelViewDelegate {
 
 extension UIViewController {
     // 代理方法 点击cell
-    func excelView(_ excelView: AKExcelView, didSelectItemAt indexPath: IndexPath) {
+    @objc func excelView(_ excelView: AKExcelView, didSelectItemAt indexPath: IndexPath) {
         print("section: \(indexPath.section)  -  item: \(indexPath.item)")
     }
     
     // 替换item View的代理方法
-    func excelView(_ excelView: AKExcelView, viewAt indexPath: IndexPath) -> UIView? {
+    @objc func excelView(_ excelView: AKExcelView, viewAt indexPath: IndexPath) -> UIView? {
         
         // 获取当前cell的size
-        let size = excelView.sizeForRow(row: indexPath.row)
+//        let size = excelView.sizeForRow(row: indexPath.row)
         
 //        print(size)
         

@@ -157,9 +157,9 @@ extension String {
     
     func getTextSize(font:UIFont,size:CGSize) -> CGSize {
         
-        let dic = NSDictionary(object: font, forKey: NSFontAttributeName as NSCopying)
+        let dic = NSDictionary(object: font, forKey: NSAttributedStringKey.font as NSCopying)
         
-        let stringSize = self.boundingRect(with: size, options: .usesLineFragmentOrigin, attributes: dic as? [String : AnyObject], context:nil).size
+        let stringSize = self.boundingRect(with: size, options: .usesLineFragmentOrigin, attributes: dic as? [NSAttributedStringKey : Any] , context:nil).size
         
         return stringSize
     }
