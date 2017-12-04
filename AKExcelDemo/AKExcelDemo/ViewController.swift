@@ -17,7 +17,13 @@ class ViewController: UIViewController , AKExcelViewDelegate {
         super.viewDidLoad()
         view.backgroundColor = UIColor.lightGray
         title = "我的统计"
-        automaticallyAdjustsScrollViewInsets = false
+        if #available(iOS 11.0, *) {
+            self.contentInsetAdjustmentBehavior = .never
+        }else{
+            
+            automaticallyAdjustsScrollViewInsets = false
+        }
+
         
         // 设置表头背景色
         excelView.headerBackgroundColor = UIColor.cyan

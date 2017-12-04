@@ -44,7 +44,7 @@ class AKExcelDataManager: NSObject {
         if ((excelView?.contentData) != nil) {
             for model in (excelView?.contentData)! {
                 
-                arrM.append(model.getValueOfPropertys(properties: excelView?.properties))
+                arrM.append(model.valuesFor(excelView?.properties))
             }
         }
         dataArray = arrM
@@ -161,89 +161,42 @@ extension String {
     }
 }
 
-//MARK: - 获取属性值
-extension NSObject {
+
+extension NSObject
+{
+    func propertyNames() -> [String] {
+        
+        return Mirror(reflecting: self).children.flatMap { $0.label }
+    }
     
-    /**
-     获取对象所有的属性值，无对应的属性则返回NIL
-     
-     - returns: [String]
-     */
-    func getValueOfPropertys(properties : Array<String>?) -> [String] {
+    func valueFor(_ property:String) -> String? {
+        
+        var value : String?
+        for case let (label?, anyValue) in Mirror(reflecting:self).children {
+            if label.isEqual(property) {
+                value = anyValue as? String
+                //                return anyValue as? String
+            }
+        }
+        return value
+    }
+    
+    func valuesFor(_ properties:[String]?) -> [String] {
         
         if let pros = properties {
-            var values = [String]()
+            var arrM = [String]()
             for pro in pros {
-                values.append(self.getValueOfProperty(property: pro) as! String)
+                arrM.append(valueFor(pro)!)
             }
-            return values;
+            return arrM
         }
-        let allPropertys = self.getAllPropertys()
+        
         var values = [String]()
-        for pro in allPropertys {
-            values.append(self.getValueOfProperty(property: pro) as! String)
-        }
-        return values;
-    }
-    
-    
-    /**
-     获取对象对于的属性值，无对应的属性则返回NIL
-     
-     - parameter property: 要获取值的属性
-     
-     - returns: 属性的值
-     */
-    func getValueOfProperty(property:String)->AnyObject?{
-        let allPropertys = self.getAllPropertys()
-        if(allPropertys.contains(property)){
-            return self.value(forKey: property) as AnyObject
+        for case let (_?, anyValue) in Mirror(reflecting:self).children {
             
-        }else{
-            return nil
+            values.append(anyValue as? String ?? "")
         }
+        return values
     }
-    
-    /**
-     设置对象属性的值
-     
-     - parameter property: 属性
-     - parameter value:    值
-     
-     - returns: 是否设置成功
-     */
-    func setValueOfProperty(property:String,value:AnyObject)->Bool{
-        let allPropertys = self.getAllPropertys()
-        if(allPropertys.contains(property)){
-            self.setValue(value, forKey: property)
-            return true
-            
-        }else{
-            return false
-        }
-    }
-    
-    /**
-     获取对象的所有属性名称
-     - returns: 属性名称数组
-     */
-    func getAllPropertys()->[String]{
-        
-        var result = [String]()
-        let count = UnsafeMutablePointer<UInt32>.allocate(capacity: 0)
-        let buff = class_copyPropertyList(object_getClass(self), count)
-        let countInt = Int(count[0])
-        
-        for i in 0 ..< countInt {
-            let temp = buff?[i]
-            let tempPro = property_getName(temp)
-            
-            let proper = String.init(cString: tempPro!)
-//            print(proper)
-            result.append(proper)
-        }
-        
-        return result
-    }
-    
 }
+

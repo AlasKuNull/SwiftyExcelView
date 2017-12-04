@@ -207,7 +207,7 @@ extension AKExcelView {
             if let pros = properties {
                 return pros.count - leftFreezeColumn
             }
-            let slideColumn = (firstBodyData?.getAllPropertys().count)! - leftFreezeColumn;
+            let slideColumn = (firstBodyData?.propertyNames().count)! - leftFreezeColumn;
             return slideColumn
         }
     }
@@ -334,6 +334,10 @@ extension UICollectionView {
         backgroundColor = UIColor.clear
         showsVerticalScrollIndicator = false
         translatesAutoresizingMaskIntoConstraints = false
+        if #available(iOS 11.0, *) {
+            self.contentInsetAdjustmentBehavior = .never
+        }
+
     }
 }
 
