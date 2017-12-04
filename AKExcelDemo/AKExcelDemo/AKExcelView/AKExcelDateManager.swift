@@ -32,6 +32,8 @@ class AKExcelDataManager: NSObject {
     var contentFreezeData = [[String]]()
     /// contentSlideCollectionView Data
     var contentSlideData = [[String]]()
+    /// slideItemOffSetX
+    var slideItemOffSetX = [CGFloat]()
     
     //MARK: - Private Method
     private func loadData() {
@@ -109,9 +111,9 @@ class AKExcelDataManager: NSObject {
                     size = value?.getTextSize(font: (excelView?.headerTextFontSize)!, size: CGSize.init(width: (excelView?.itemMaxWidth)!, height: (excelView?.itemHeight)!))
                 }
                 
-                if ((excelView?.setsDic) != nil) {
+                if ((excelView?.columnWidthSetting) != nil) {
                     
-                    if let setWidth = excelView?.setsDic?[i] {
+                    if let setWidth = excelView?.columnWidthSetting?[i] {
                         
                         size = CGSize.init(width: setWidth, height: (excelView?.itemHeight)!)
                     }
@@ -125,6 +127,8 @@ class AKExcelDataManager: NSObject {
                 
                 colW = max((excelView?.itemMinWidth)!, min((excelView?.itemMaxWidth)!, colW))
             }
+            // 滑动scroll节点
+            slideItemOffSetX.append(slideWidth)
             if (i < (excelView?.leftFreezeColumn)!) {
                 
                 fItemSize.append(NSStringFromCGSize(CGSize.init(width: colW, height: (excelView?.itemHeight)! - 1)))

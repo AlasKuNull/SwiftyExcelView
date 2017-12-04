@@ -52,12 +52,14 @@ class AKExcelView: UIView , UICollectionViewDelegate , UICollectionViewDataSourc
     var headerTitles : Array<String>?
     /// content Data
     var contentData : Array<NSObject>?
-    /// setRows widths
-    var setsDic : Dictionary<Int, CGFloat>?
+    /// set Column widths
+    var columnWidthSetting : Dictionary<Int, CGFloat>?
     /// CelledgeInset
     var itemInsets : UIEdgeInsets?
     /// showsProperties
     var properties : Array<String>?
+    /// autoScrollItem default is false
+    var autoScrollToNearItem : Bool = false
     
     //MARK: - Public Method
     override init(frame: CGRect) {
@@ -309,6 +311,53 @@ extension AKExcelView {
             contentFreezeCollectionView.contentOffset = scrollView.contentOffset
             contentMoveableCollectionView.contentOffset = scrollView.contentOffset
         }
+    }
+    
+    
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        
+        if autoScrollToNearItem && scrollView == contentScrollView && !decelerate {
+            scrollEndAnimation(scrollView: scrollView)
+
+        }
+    }
+        
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        if scrollView == contentScrollView && autoScrollToNearItem {
+            scrollEndAnimation(scrollView: scrollView)
+        }
+    }
+    
+    func scrollEndAnimation(scrollView: UIScrollView) {
+    
+        let offSetX = scrollView.contentOffset.x
+        
+        let deltaOffSets = dataManager.slideItemOffSetX.flatMap({ (offset) -> CGFloat in
+            
+            return abs(offset - offSetX)
+        })
+        
+        var min:CGFloat = deltaOffSets[0]
+        
+        for i in 0..<deltaOffSets.count {
+            if deltaOffSets[i] < min {
+                min = deltaOffSets[i]
+            }
+        }
+        let index = deltaOffSets.index(of: min)
+        let slideToOffset = dataManager.slideItemOffSetX[index!]
+        
+        let scrollViewWidth = bounds.size.width - dataManager.freezeWidth
+        
+        if dataManager.slideWidth - slideToOffset < scrollViewWidth {
+            
+            return
+        }
+        
+        UIView.animate(withDuration: 0.5, animations: {
+            scrollView.contentOffset.x = slideToOffset
+        })
     }
 }
 
