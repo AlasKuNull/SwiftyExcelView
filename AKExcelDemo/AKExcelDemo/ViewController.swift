@@ -14,7 +14,6 @@ let AKScreenHeight = UIScreen.main.bounds.size.height
 
 class ViewController: UIViewController , AKExcelViewDelegate {
 
-    var excelView : AKExcelView = AKExcelView.init(frame: CGRect.init(x: 0, y: 20, width: AKScreenWidth, height: AKScreenHeight - 20))
     
     override func viewDidLoad() {
         
@@ -28,6 +27,7 @@ class ViewController: UIViewController , AKExcelViewDelegate {
             automaticallyAdjustsScrollViewInsets = false
         }
 
+        let excelView : AKExcelView = AKExcelView.init(frame: CGRect.init(x: 0, y: 20, width: AKScreenWidth, height: AKScreenHeight - 20))
         // 自动滚到最近的一列
         excelView.autoScrollToNearItem = true
         // 设置表头背景色

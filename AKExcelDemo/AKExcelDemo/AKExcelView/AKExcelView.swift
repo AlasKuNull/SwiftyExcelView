@@ -14,9 +14,7 @@ let AKCollectionViewHeaderIdentifier = "AKCollectionView_Header"
 @objc protocol AKExcelViewDelegate : NSObjectProtocol {
     
     @objc optional func excelView(_ excelView: AKExcelView, didSelectItemAt indexPath: IndexPath)
-    
     @objc optional func excelView(_ excelView: AKExcelView, viewAt indexPath: IndexPath) -> UIView?
-    
     @objc optional func excelView(_ excelView: AKExcelView, attributedStringAt indexPath: IndexPath) -> NSAttributedString?
 }
 
@@ -61,6 +59,24 @@ class AKExcelView: UIView , UICollectionViewDelegate , UICollectionViewDataSourc
     /// autoScrollItem default is false
     var autoScrollToNearItem : Bool = false
     
+    fileprivate lazy var horizontalShadow : CAShapeLayer = {
+        let s = CAShapeLayer()
+        s.strokeColor = UIColor.lightGray.cgColor;
+        s.shadowColor = UIColor.black.cgColor;
+        s.shadowOffset = CGSize.init(width: 2, height: 0)
+        s.shadowOpacity = 1;
+        return s
+    }()
+    
+    fileprivate lazy var veritcalShadow : CAShapeLayer = {
+        let s = CAShapeLayer()
+        s.strokeColor = UIColor.lightGray.cgColor;
+        s.shadowColor = UIColor.black.cgColor;
+        s.shadowOffset = CGSize.init(width: 0, height: 3)
+        s.shadowOpacity = 1;
+        return s
+    }()
+
     //MARK: - Public Method
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -110,11 +126,43 @@ class AKExcelView: UIView , UICollectionViewDelegate , UICollectionViewDataSourc
         contentScrollView.addSubview(headMovebleCollectionView)
         contentScrollView.addSubview(contentMoveableCollectionView)
         
+        layer.addSublayer(horizontalShadow)
+        contentScrollView.layer.addSublayer(veritcalShadow)
+        
         NotificationCenter.default.addObserver(self, selector: #selector(handleNotifi(notifi:)), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
     }
     
     deinit {
         NotificationCenter.default.removeObserver(self)
+    }
+    
+   fileprivate func showHorizontalDivideShadowLayer() {
+    if horizontalShadow.path == nil {
+        let path = UIBezierPath()
+        path.move(to: CGPoint.init(x: 0, y: headerHeight))
+        path.addLine(to: CGPoint.init(x: min(self.bounds.size.width, self.dataManager.freezeWidth + self.dataManager.slideWidth), y: headerHeight))
+        path.lineWidth = 0.5
+        horizontalShadow.path = path.cgPath
+    }
+    }
+    
+    func dismissHorizontalDivideShadowLayer() {
+        horizontalShadow.path = nil
+    }
+    
+    func showVerticalDivideShadowLayer() {
+        if veritcalShadow.path == nil {
+            let path = UIBezierPath()
+            let heigh = contentScrollView.contentSize.height + headFreezeCollectionView.contentSize.height
+            path.move(to: CGPoint.init(x: 0, y:0))
+            path.addLine(to: CGPoint.init(x: 0, y: heigh))
+            path.lineWidth = 0.5
+            veritcalShadow.path = path.cgPath
+        }
+    }
+    
+    func dismissVerticalDivideShadowLayer() {
+        veritcalShadow.path = nil
     }
     
     @objc func handleNotifi(notifi:NSNotification) {
@@ -310,10 +358,25 @@ extension AKExcelView {
         if scrollView != contentScrollView {
             contentFreezeCollectionView.contentOffset = scrollView.contentOffset
             contentMoveableCollectionView.contentOffset = scrollView.contentOffset
+            
+            if scrollView.contentOffset.y > 0 {
+                showHorizontalDivideShadowLayer()
+            } else {
+                dismissHorizontalDivideShadowLayer()
+            }
+
+        }else{
+            if (scrollView.contentOffset.x > 0) {
+                showVerticalDivideShadowLayer()
+            } else {
+                dismissVerticalDivideShadowLayer()
+            }
+            CATransaction.begin()
+            CATransaction.setDisableActions(true)
+            veritcalShadow.transform = CATransform3DMakeTranslation(scrollView.contentOffset.x, 0, 0)
+            CATransaction.commit()
         }
     }
-    
-    
     
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         
