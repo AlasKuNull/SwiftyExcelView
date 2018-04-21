@@ -56,7 +56,6 @@ class ViewController: UIViewController , AKExcelViewDelegate {
             
             arrM.append(model)
         }
-        
         excelView.contentData = arrM
         view.addSubview(excelView)
         excelView.reloadData()

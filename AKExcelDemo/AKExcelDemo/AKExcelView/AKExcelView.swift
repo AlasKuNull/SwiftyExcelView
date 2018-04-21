@@ -93,23 +93,27 @@ class AKExcelView: UIView , UICollectionViewDelegate , UICollectionViewDataSourc
     }
     
     func reloadData() {
-        
-        dataManager.caculateData()
-        
-        headFreezeCollectionView.reloadData()
-        headMovebleCollectionView.reloadData()
-        contentFreezeCollectionView.reloadData()
-        contentMoveableCollectionView.reloadData()
-        
-        setUpFrames()
+        DispatchQueue.global().async {
+            
+            self.dataManager.caculateData()
+            DispatchQueue.main.async {
+                
+                self.headFreezeCollectionView.reloadData()
+                self.headMovebleCollectionView.reloadData()
+                self.contentFreezeCollectionView.reloadData()
+                self.contentMoveableCollectionView.reloadData()
+                
+                self.setUpFrames()
+            }
+        }
     }
     
-    func sizeForRow(row: Int) -> CGSize {
+    func sizeForItem(item: Int) -> CGSize {
         
-        if row < leftFreezeColumn {
-            return CGSizeFromString(self.dataManager.freezeItemSize[row]);
+        if item < leftFreezeColumn {
+            return CGSizeFromString(self.dataManager.freezeItemSize[item]);
         } else {
-            return CGSizeFromString(self.dataManager.slideItemSize[row - leftFreezeColumn]);
+            return CGSizeFromString(self.dataManager.slideItemSize[item - leftFreezeColumn]);
         }
     }
     
@@ -119,6 +123,7 @@ class AKExcelView: UIView , UICollectionViewDelegate , UICollectionViewDataSourc
         dataManager.excelView = self
         clipsToBounds = true
         
+        
         addSubview(headFreezeCollectionView)
         addSubview(contentFreezeCollectionView)
         addSubview(contentScrollView)
@@ -126,14 +131,11 @@ class AKExcelView: UIView , UICollectionViewDelegate , UICollectionViewDataSourc
         contentScrollView.addSubview(headMovebleCollectionView)
         contentScrollView.addSubview(contentMoveableCollectionView)
         
+        contentMoveableCollectionView.contentInset = UIEdgeInsetsMake(-1, 0, 0, 0)
+        contentFreezeCollectionView.contentInset = UIEdgeInsetsMake(-1, 0, 0, 0)
+
         layer.addSublayer(horizontalShadow)
         contentScrollView.layer.addSublayer(veritcalShadow)
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(handleNotifi(notifi:)), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
-    }
-    
-    deinit {
-        NotificationCenter.default.removeObserver(self)
     }
     
    fileprivate func showHorizontalDivideShadowLayer() {
@@ -146,11 +148,11 @@ class AKExcelView: UIView , UICollectionViewDelegate , UICollectionViewDataSourc
     }
     }
     
-    func dismissHorizontalDivideShadowLayer() {
+    fileprivate func dismissHorizontalDivideShadowLayer() {
         horizontalShadow.path = nil
     }
     
-    func showVerticalDivideShadowLayer() {
+    fileprivate func showVerticalDivideShadowLayer() {
         if veritcalShadow.path == nil {
             let path = UIBezierPath()
             let heigh = contentScrollView.contentSize.height + headFreezeCollectionView.contentSize.height
@@ -161,21 +163,11 @@ class AKExcelView: UIView , UICollectionViewDelegate , UICollectionViewDataSourc
         }
     }
     
-    func dismissVerticalDivideShadowLayer() {
+    fileprivate func dismissVerticalDivideShadowLayer() {
         veritcalShadow.path = nil
     }
     
-    @objc func handleNotifi(notifi:NSNotification) {
-        
-        let orientation = UIDevice.current.orientation
-        if orientation != UIDeviceOrientation.portraitUpsideDown {
-            UIView.animate(withDuration: 0.3, animations: {
-                self.setUpFrames()
-            })
-        }
-    }
-    
-    private func setUpFrames() {
+    fileprivate func setUpFrames() {
         
         let width = bounds.size.width
         let height = bounds.size.height
@@ -234,6 +226,7 @@ class AKExcelView: UIView , UICollectionViewDelegate , UICollectionViewDataSourc
         
         return slideScrollView
     }()
+
 }
 
 //MARK: - UICollectionView Delegate & DataSource & collectionPrivate
@@ -285,25 +278,25 @@ extension AKExcelView {
                 cell.backgroundColor = headerBackgroundColor
                 cell.textLabel.text = headerTitles?[indexPath.item + leftFreezeColumn]
                 cell.textLabel.font = headerTextFontSize
-                targetIndexPath = NSIndexPath.init(row: indexPath.row + leftFreezeColumn, section: indexPath.section) as IndexPath
+                targetIndexPath = NSIndexPath.init(item: indexPath.item + leftFreezeColumn, section: indexPath.section) as IndexPath
 
             }
         }else if (collectionView == contentFreezeCollectionView) {
-            let text = dataManager.contentFreezeData[indexPath.section][indexPath.row];
+            let text = dataManager.contentFreezeData[indexPath.section][indexPath.item];
             cell.textLabel.text = text;
             cell.backgroundColor = contentBackgroundColor;
             cell.textLabel.textColor = contentTextColor;
             cell.textLabel.font = contentTextFontSize;
 
-            targetIndexPath = NSIndexPath.init(row: indexPath.row, section: indexPath.section + 1) as IndexPath
+            targetIndexPath = NSIndexPath.init(item: indexPath.item, section: indexPath.section + 1) as IndexPath
         } else {
-            let text = dataManager.contentSlideData[indexPath.section][indexPath.row];
+            let text = dataManager.contentSlideData[indexPath.section][indexPath.item];
             cell.textLabel.text = text;
             cell.backgroundColor = contentBackgroundColor;
             cell.textLabel.textColor = contentTextColor;
             cell.textLabel.font = contentTextFontSize;
             
-            targetIndexPath = NSIndexPath.init(row: indexPath.row + leftFreezeColumn, section: indexPath.section + 1) as IndexPath
+            targetIndexPath = NSIndexPath.init(item: indexPath.item + leftFreezeColumn, section: indexPath.section + 1) as IndexPath
         }
         
         self.customViewInCell(cell: cell, indexPath: targetIndexPath)
@@ -318,10 +311,10 @@ extension AKExcelView {
             if (collectionView == headFreezeCollectionView ||
                 collectionView == contentFreezeCollectionView) {
                 
-                return CGSizeFromString(self.dataManager.freezeItemSize[indexPath.row]);
+                return CGSizeFromString(self.dataManager.freezeItemSize[indexPath.item]);
             } else {
                 
-                return CGSizeFromString(self.dataManager.slideItemSize[indexPath.row]);
+                return CGSizeFromString(self.dataManager.slideItemSize[indexPath.item]);
             }
         }
     }
@@ -332,11 +325,11 @@ extension AKExcelView {
         if collectionView == headFreezeCollectionView {
             
         } else if (collectionView == headMovebleCollectionView) {
-            targetIndexPath = NSIndexPath.init(row: indexPath.row + leftFreezeColumn, section: indexPath.section) as IndexPath
+            targetIndexPath = NSIndexPath.init(item: indexPath.item + leftFreezeColumn, section: indexPath.section) as IndexPath
         } else if (collectionView == contentFreezeCollectionView) {
-            targetIndexPath = NSIndexPath.init(row: indexPath.row, section: indexPath.section + 1) as IndexPath
+            targetIndexPath = NSIndexPath.init(item: indexPath.item, section: indexPath.section + 1) as IndexPath
         } else {
-            targetIndexPath = NSIndexPath.init(row: indexPath.row + leftFreezeColumn, section: indexPath.section + 1) as IndexPath
+            targetIndexPath = NSIndexPath.init(item: indexPath.item + leftFreezeColumn, section: indexPath.section + 1) as IndexPath
         }
         self.delegate?.excelView?(self, didSelectItemAt: targetIndexPath)
     }
@@ -366,6 +359,7 @@ extension AKExcelView {
             }
 
         }else{
+            
             if (scrollView.contentOffset.x > 0) {
                 showVerticalDivideShadowLayer()
             } else {
@@ -379,20 +373,20 @@ extension AKExcelView {
     }
     
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        
+
         if autoScrollToNearItem && scrollView == contentScrollView && !decelerate {
             scrollEndAnimation(scrollView: scrollView)
 
         }
     }
-        
+    
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         if scrollView == contentScrollView && autoScrollToNearItem {
             scrollEndAnimation(scrollView: scrollView)
         }
     }
     
-    func scrollEndAnimation(scrollView: UIScrollView) {
+    fileprivate func scrollEndAnimation(scrollView: UIScrollView) {
     
         let offSetX = scrollView.contentOffset.x
         
@@ -449,20 +443,19 @@ extension UICollectionView {
         if #available(iOS 11.0, *) {
             self.contentInsetAdjustmentBehavior = .never
         }
-
     }
 }
 
 //MARK: - AKExcelView Delegate Implemention
 extension AKExcelView {
     
-     func customViewInCell(cell : AKExcelCollectionViewCell , indexPath : IndexPath) {
+     fileprivate func customViewInCell(cell : AKExcelCollectionViewCell , indexPath : IndexPath) {
         
         let customView = delegate?.excelView?(self, viewAt: indexPath)
             cell.customView = customView
     }
     
-     func attributeStringInCell(cell: AKExcelCollectionViewCell , indexPath : IndexPath) {
+     fileprivate func attributeStringInCell(cell: AKExcelCollectionViewCell , indexPath : IndexPath) {
         
         let attributeString = delegate?.excelView?(self, attributedStringAt: indexPath)
         if attributeString != nil {
@@ -470,6 +463,7 @@ extension AKExcelView {
         }
     }
 }
+
 
 
 
