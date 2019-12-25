@@ -18,7 +18,7 @@ class ViewController: UIViewController , AKExcelViewDelegate {
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        view.backgroundColor = UIColor.lightGray
+        view.backgroundColor = .white
         title = "我的统计"
         if #available(iOS 11.0, *) {
             
@@ -43,6 +43,7 @@ class ViewController: UIViewController , AKExcelViewDelegate {
         excelView.delegate = self
         // 指定列 设置 指定宽度  [column:width,...]
         excelView.columnWidthSetting = [3:180]
+        excelView.showNoDataView = true
         var arrM = [Model]()
         for i in 0 ..< 50 {
             
@@ -58,7 +59,13 @@ class ViewController: UIViewController , AKExcelViewDelegate {
         }
         excelView.contentData = arrM
         view.addSubview(excelView)
-        excelView.reloadData()
+        
+//        excelView.reloadData()
+    
+        excelView.reloadDataCompleteHandler {
+            print(" reload complete")
+
+        }
     }
 }
 
@@ -68,6 +75,11 @@ extension UIViewController {
     // 代理方法 点击cell
     @objc func excelView(_ excelView: AKExcelView, didSelectItemAt indexPath: IndexPath) {
         print("section: \(indexPath.section)  -  item: \(indexPath.item)")
+        
+        let alertVc = UIAlertController.init(title: "Title", message: "tap section: \(indexPath.section)  -  item: \(indexPath.item)", preferredStyle: .alert)
+        let action = UIAlertAction.init(title: "OK", style: .default, handler: nil)
+        alertVc.addAction(action)
+        self.present(alertVc, animated: true, completion: nil)
     }
     
     // 替换item View的代理方法
@@ -80,10 +92,10 @@ extension UIViewController {
         
         if indexPath.section == 5 && indexPath.row == 3 {
             
-            let v = UIView()
-            v.backgroundColor = UIColor.blue
+            let customView = UIView()
+            customView.backgroundColor = UIColor.blue
             
-            return v
+            return customView
         }
         return nil
     }

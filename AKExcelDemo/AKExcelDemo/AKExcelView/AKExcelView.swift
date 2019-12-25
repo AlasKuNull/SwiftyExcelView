@@ -58,7 +58,26 @@ class AKExcelView: UIView , UICollectionViewDelegate , UICollectionViewDataSourc
     var properties : Array<String>?
     /// autoScrollItem default is false
     var autoScrollToNearItem : Bool = false
-    
+    /// showNoDataView default is false
+    var showNoDataView : Bool = false {
+        didSet{
+            self.addSubview(alertLabel)
+            alertLabel.center = self.center
+        }
+    }
+    var noDataDescription : String = " - 暂无数据 - " {
+        didSet{
+            alertLabel.text = noDataDescription
+        }
+    }
+    var alertLabel : UILabel = {
+        let alertLabel = UILabel()
+        alertLabel.text = " - 暂无数据 - "
+        alertLabel.textColor = .lightGray
+        alertLabel.sizeToFit()
+        return alertLabel
+    }()
+
     fileprivate lazy var horizontalShadow : CAShapeLayer = {
         let s = CAShapeLayer()
         s.strokeColor = UIColor.lightGray.cgColor;
@@ -107,6 +126,24 @@ class AKExcelView: UIView , UICollectionViewDelegate , UICollectionViewDataSourc
             }
         }
     }
+    
+    func reloadDataCompleteHandler(complete:@escaping () -> Void) {
+        DispatchQueue.global().async {
+            
+            self.dataManager.caculateData()
+            DispatchQueue.main.async {
+                
+                self.headFreezeCollectionView.reloadData()
+                self.headMovebleCollectionView.reloadData()
+                self.contentFreezeCollectionView.reloadData()
+                self.contentMoveableCollectionView.reloadData()
+                
+                self.setUpFrames()
+                complete()
+            }
+        }
+    }
+
     
     func sizeForItem(item: Int) -> CGSize {
         
@@ -192,6 +229,10 @@ class AKExcelView: UIView , UICollectionViewDelegate , UICollectionViewDataSourc
             
             contentMoveableCollectionView.frame = CGRect.init(x: 0, y: 0, width: dataManager.slideWidth, height: height - headerHeight)
         }
+        if showNoDataView {
+            self.alertLabel.isHidden = self.contentData?.count == 0 ? false : true
+        }
+
     }
     
     //MARK: - 懒加载
@@ -245,13 +286,16 @@ extension AKExcelView {
         if collectionView == headFreezeCollectionView || collectionView == contentFreezeCollectionView {
             return leftFreezeColumn
         } else {
-            let firstBodyData = self.contentData?.first!
+            if let firstBodyData = self.contentData?.first {
             
             if let pros = properties {
                 return pros.count - leftFreezeColumn
             }
-            let slideColumn = (firstBodyData?.propertyNames().count)! - leftFreezeColumn;
+                let slideColumn = (firstBodyData.propertyNames().count) - leftFreezeColumn;
             return slideColumn
+            }else{
+                return 0
+            }
         }
     }
     
